@@ -9,7 +9,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 @ControllerAdvice
-public class ApiExceptionHandler {
+class ApiExceptionHandler {
 
   @ExceptionHandler(value = {ProductNotFoundException.class})
   public ResponseEntity<Object> handleProductNotFound(ProductNotFoundException e) {
@@ -21,6 +21,13 @@ public class ApiExceptionHandler {
   @ExceptionHandler(value = {DatasourceFailureException.class})
   public ResponseEntity<Object> handleDatasourceFailure(DatasourceFailureException e) {
     HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+    ApiException apiException = getApiException(status, e.getMessage());
+    return new ResponseEntity<>(apiException, status);
+  }
+
+  @ExceptionHandler(value = {OpinionNotFoundException.class})
+  public ResponseEntity<Object> handleOpinionNotFoundException(OpinionNotFoundException e) {
+    HttpStatus status = HttpStatus.NOT_FOUND;
     ApiException apiException = getApiException(status, e.getMessage());
     return new ResponseEntity<>(apiException, status);
   }

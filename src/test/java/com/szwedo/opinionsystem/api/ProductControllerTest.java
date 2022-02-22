@@ -38,7 +38,7 @@ class ProductControllerTest {
   }
 
   @Test
-  void getProductById() {
+  void should_return_product_when_product_exists() {
     //given
     Long productId=1L;
     Product product=Product.builder()
