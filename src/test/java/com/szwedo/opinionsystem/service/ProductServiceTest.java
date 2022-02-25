@@ -21,10 +21,9 @@ import static org.mockito.Mockito.when;
 class ProductServiceTest {
 
   @InjectMocks
-  private ProductService service;
+  private ProductServiceImpl service;
   @Mock
   private ProductRepository repository;
-
 
   @Test
   void should_return_product_when_product_exists() {
@@ -64,18 +63,14 @@ class ProductServiceTest {
     when(repository.findById(productId)).thenThrow(DatasourceFailureException.class);
     when(repository.findAll()).thenThrow(DatasourceFailureException.class);
     //then
-    assertThrows(DatasourceFailureException.class, () -> {
-      service.getProductById(1L);
-    });
-    assertThrows(DatasourceFailureException.class, () -> {
-      service.getAllProduct();
-    });
+    assertThrows(DatasourceFailureException.class, () -> service.getProductById(1L));
+    assertThrows(DatasourceFailureException.class, () -> service.getAllProduct());
   }
 
   @Test
   void should_return_list_of_products() {
     //given
-    List<Product> productList=List.of(
+    List<Product> productList = List.of(
         Product.builder()
             .id(1L)
             .description("description")
@@ -86,6 +81,6 @@ class ProductServiceTest {
     //when
     when(repository.findAll()).thenReturn(productList);
     //then
-    assertEquals(productList,service.getAllProduct());
+    assertEquals(productList, service.getAllProduct());
   }
 }

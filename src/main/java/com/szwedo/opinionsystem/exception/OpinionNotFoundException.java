@@ -5,4 +5,3 @@ public class OpinionNotFoundException extends RuntimeException {
     super("The opinion with id " + id + " does not found");
   }
 }
-

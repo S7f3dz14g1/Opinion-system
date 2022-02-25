@@ -1,6 +1,5 @@
 package com.szwedo.opinionsystem.entity;
 
-
 import lombok.*;
 
 import javax.persistence.*;
