@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - "5444:5432"
+    environment:
+      POSTGRES_DB: "opinions-system"
+      POSTGRES_USER: "system"
+      POSTGRES_PASSWORD: "system"
+    volumes:
+      - ./src/main/resources/docker:/docker-entrypoint-initdb.d/
